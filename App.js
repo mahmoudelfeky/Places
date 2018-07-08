@@ -2,11 +2,13 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import PlaceList from "./src/components/PlaceList/PlaceList";
 import PlaceInput from "./src/components/PlaceInput/PlaceInput";
+import PlaceDetail from "./src/components/PlaceDetail/PlaceDetail";
 export default class App extends React.Component {
   state = 
   {
     placeName:"",
-    places:[]
+    places:[],
+    selectedPlace:null
   }
   placeNameChangedHandler = value=>
   {
@@ -35,24 +37,29 @@ export default class App extends React.Component {
    })
     
   }
-  PlaceDeletedHandler = key=>{
-   
-    this.setState(prevState=>{
-      return {
-        places:prevState.places.filter((place)=>{
-          return key !== place.key;
-        })
-      }
-    })
+  placeSelectedHandler = key=>{
+   this.setState(prevState=>{
+     return{selectedPlace:prevState.places.find(place=>{
+       return place.key === key;
+     })}
+   })
+    // this.setState(prevState=>{
+    //   return {
+    //     places:prevState.places.filter((place)=>{
+    //       return key !== place.key;
+    //     })
+    //   }
+    // })
   }
   render() {
    
     return (
       <View style = {styles.container}>
+      <PlaceDetail selectedPlace = {this.state.selectedPlace}/>
       <PlaceInput title = "Add" value = {this.state.placeName} 
       onChangeText  = {this.placeNameChangedHandler}
       onPress = {this.placeSubmitHandler} />
-        <PlaceList places = {this.state.places} onItemDeleted = {this.PlaceDeletedHandler}/>
+        <PlaceList places = {this.state.places} onItemSelected = {this.placeSelectedHandler}/>
       </View>
     );
   }
