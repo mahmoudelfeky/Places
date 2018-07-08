@@ -6,16 +6,18 @@ const PlaceDetail = props => {
     {
         modalContent = <View>
              <Image source={props.selectedPlace.image} style = {styles.placeImage} />
-            <Text>{props.selectedPlace.name}</Text>
+            <Text style = {styles.placeName}>{props.selectedPlace.name}</Text>
         </View>
     }
     return(
-    <Modal visible = {props.selectedPlace !== null} animationType = "slide">
+    <Modal 
+    onRequestClose = {props.onModalClosed}
+    visible = {props.selectedPlace !== null} animationType = "slide">
         <View style = {styles.modalContainer}>
            {modalContent}
             <View>
-                <Button title= "Delete" color= "red"/>
-                <Button title ="Close" />
+                <Button title= "Delete" color= "red"onPress={props.onItemDeleted}/>
+                <Button title ="Close" onPress={props.onModalClosed} />
             </View>
         </View>
    </Modal>);
@@ -23,7 +25,13 @@ const PlaceDetail = props => {
      }
      const styles = StyleSheet.create({
          modalContainer:{
-           
+             margin:22
+         },
+         placeName:{
+             fontWeight:"bold",
+             textAlign:"center",
+             fontSize:28
+
          },
          placeImage:{
              width:"100%",
