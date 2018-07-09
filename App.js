@@ -1,56 +1,31 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import PlaceList from "./src/components/PlaceList/PlaceList";
+import React, { Component } from "react";
+import { StyleSheet, View } from "react-native";
+
 import PlaceInput from "./src/components/PlaceInput/PlaceInput";
+import PlaceList from "./src/components/PlaceList/PlaceList";
 import PlaceDetail from "./src/components/PlaceDetail/PlaceDetail";
-export default class App extends React.Component {
-  state =
-    {
-      placeName: "",
-      places: [],
-      selectedPlace: null
-    }
-  placeNameChangedHandler = value => {
 
-    this.setState({
-      placeName: value
-    });
-  }
-  placeSubmitHandler = () => {
-    if (this.state.placeName.trim() === "") {
-      return;
-    }
+export default class App extends Component {
+  state = {
+    places: [],
+    selectedPlace: null
+  };
 
+  placeAddedHandler = placeName => {
     this.setState(prevState => {
-
       return {
         places: prevState.places.concat({
           key: Math.random().toString(),
-          name: prevState.placeName,
+          name: placeName,
           image: {
-            uri: "http://pngimagesfree.com/NATURE/Tree/thumb/Bright_green_tree_png-image.png"
+            uri:
+              "https://c1.staticflickr.com/5/4096/4744241983_34023bf303_b.jpg"
           }
         })
-      }
-    })
+      };
+    });
+  };
 
-  }
-  placeSelectedHandler = key => {
-    this.setState(prevState => {
-      return {
-        selectedPlace: prevState.places.find(place => {
-          return place.key === key;
-        })
-      }
-    })
-    // this.setState(prevState=>{
-    //   return {
-    //     places:prevState.places.filter((place)=>{
-    //       return key !== place.key;
-    //     })
-    //   }
-    // })
-  }
   placeDeletedHandler = () => {
     this.setState(prevState => {
       return {
@@ -67,18 +42,30 @@ export default class App extends React.Component {
       selectedPlace: null
     });
   };
-  render() {
 
+  placeSelectedHandler = key => {
+    this.setState(prevState => {
+      return {
+        selectedPlace: prevState.places.find(place => {
+          return place.key === key;
+        })
+      };
+    });
+  };
+
+  render() {
     return (
       <View style={styles.container}>
         <PlaceDetail
           selectedPlace={this.state.selectedPlace}
           onItemDeleted={this.placeDeletedHandler}
-          onModalClosed={this.modalClosedHandler} />
-        <PlaceInput title="Add" value={this.state.placeName}
-          onChangeText={this.placeNameChangedHandler}
-          onPress={this.placeSubmitHandler} />
-        <PlaceList places={this.state.places} onItemSelected={this.placeSelectedHandler} />
+          onModalClosed={this.modalClosedHandler}
+        />
+        <PlaceInput onPlaceAdded={this.placeAddedHandler} />
+        <PlaceList
+          places={this.state.places}
+          onItemSelected={this.placeSelectedHandler}
+        />
       </View>
     );
   }
@@ -88,8 +75,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 26,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "flex-start"
   }
 });
