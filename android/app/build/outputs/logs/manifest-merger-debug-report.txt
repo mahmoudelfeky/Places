@@ -4,6 +4,7 @@ ADDED from F:\Training\AwesomePlaces\android\app\src\main\AndroidManifest.xml:1:
 INJECTED from F:\Training\AwesomePlaces\android\app\src\main\AndroidManifest.xml:1:1-26:12
 INJECTED from F:\Training\AwesomePlaces\android\app\src\main\AndroidManifest.xml:1:1-26:12
 INJECTED from F:\Training\AwesomePlaces\android\app\src\main\AndroidManifest.xml:1:1-26:12
+MERGED from [:react-native-vector-icons] F:\Training\AwesomePlaces\node_modules\react-native-vector-icons\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.55.4] C:\Users\Mahmoud\.gradle\caches\transforms-1\files-1.1\react-native-0.55.4.aar\42b5cb2b159df42883cbee69482af4f3\AndroidManifest.xml:2:1-15:12
 MERGED from [com.android.support:appcompat-v7:23.0.1] C:\Users\Mahmoud\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.0.1.aar\6c869ef203930b5d0230db38f64dffff\AndroidManifest.xml:17:1-24:12
 MERGED from [com.android.support:support-v4:23.0.1] C:\Users\Mahmoud\.gradle\caches\transforms-1\files-1.1\support-v4-23.0.1.aar\508c6daa928767b3509f7c25fdf7365a\AndroidManifest.xml:17:1-24:12
@@ -93,6 +94,8 @@ uses-sdk
 INJECTED from F:\Training\AwesomePlaces\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from F:\Training\AwesomePlaces\android\app\src\main\AndroidManifest.xml
 INJECTED from F:\Training\AwesomePlaces\android\app\src\main\AndroidManifest.xml
+MERGED from [:react-native-vector-icons] F:\Training\AwesomePlaces\node_modules\react-native-vector-icons\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] F:\Training\AwesomePlaces\node_modules\react-native-vector-icons\android\build\intermediates\manifests\full\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.55.4] C:\Users\Mahmoud\.gradle\caches\transforms-1\files-1.1\react-native-0.55.4.aar\42b5cb2b159df42883cbee69482af4f3\AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.55.4] C:\Users\Mahmoud\.gradle\caches\transforms-1\files-1.1\react-native-0.55.4.aar\42b5cb2b159df42883cbee69482af4f3\AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:23.0.1] C:\Users\Mahmoud\.gradle\caches\transforms-1\files-1.1\appcompat-v7-23.0.1.aar\6c869ef203930b5d0230db38f64dffff\AndroidManifest.xml:20:5-43
