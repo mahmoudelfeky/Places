@@ -6,6 +6,7 @@ import PlaceDetail from "./src/screens/PlaceDetail/PlaceDetail";
 import SharePlace from "./src/screens/SharePlace/SharePlace";
 import { Provider } from 'react-redux';
 import configureStore from './src/store/configureStore';
+import SiderDrawer, { } from "./src/screens/SideDrawer/SideDrawer";
 
 const store = configureStore();
 // Register Screens
@@ -13,6 +14,8 @@ Navigation.registerComponent("awesome-places.AuthScreen", () => AuthScreen,store
 Navigation.registerComponent("awesome-places.SharePlaceScreen", () => SharePlace,store,Provider);
 Navigation.registerComponent("awesome-places.FindPlaceScreen", () => FindPlace,store,Provider);
 Navigation.registerComponent("awesome-places.PlaceDetail",()=>PlaceDetail,store,Provider)
+
+Navigation.registerComponent("awesome-places.SiderDrawer",()=>SiderDrawer)
 
 // Start a App
 Navigation.startSingleScreenApp({

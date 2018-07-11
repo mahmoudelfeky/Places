@@ -2,9 +2,10 @@ import React ,{ Component } from "react";
 import { View,Text } from "react-native";
 import PlaceList, { } from "../../components/PlaceList/PlaceList";
 import { connect } from "react-redux";
+import DrawerComponent, { } from "../../components/DrawerComponent/DrawerComponent";
 
 
-class FindPlaceScreen extends Component{
+class FindPlaceScreen extends DrawerComponent{
     itemSelectedHandler = key=>{
         const selPlace = this.props.places.find(place=>{
             return place.key === key
