@@ -3,17 +3,30 @@ import { View, Text, TextInput, Button, StyleSheet, ScrollView ,Image } from 're
 import { connect } from 'react-redux';
 import DrawerComponent, { } from "../../components/DrawerComponent/DrawerComponent";
 import { addPlace } from '../../store/actions/index';
-import DefaultInput from "../../components/UI/DefaultInput/DefaultInput";
+import PlaceInput from "../../components/PlaceInput/PlaceInput";
 import MainText from '../../components/UI/MainText/MainText';
 import HeadingText from '../../components/UI/HeadingText/HeadingText';
-import ImgPlaceHldr from "../../assets/beautiful-place.jpg";
+
+import PickLocation from "../../components/PickLocation/PickLocation";
+import PickImage from "../../components/PickImage/PickImage";
 class SharePlaceScreen extends DrawerComponent {
 
-
-
-    placeAddedHandler = placeName => {
-        this.props.onAddPlace(placeName);
+    state = {
+        placeName:""
     }
+
+    placeAddedHandler = () => {
+       if(this.state.placeName.trim()!=="")
+       {
+        this.props.onAddPlace(this.state.placeName);
+       }
+    }
+    
+    placeNameChangedHandler = val => {
+        this.setState({
+          placeName: val
+        });
+      };
 
     render() {
         return (
@@ -22,20 +35,13 @@ class SharePlaceScreen extends DrawerComponent {
                 <MainText>
                     <HeadingText>Share a place with us </HeadingText>
                 </MainText>
+                   <PickImage/>
                    
+                   <PickLocation/>
 
-                    <View style={styles.placeholder}>
-                    <Image  source = {ImgPlaceHldr} style = {styles.previewImage}/></View>
-                    <View style ={styles.buttons} >
-                        <Button title="Pick Image" />
-                    </View>
-                    <View style={styles.placeholder}><Text>Map</Text></View>
+                    <PlaceInput placeName = {this.state.placeName} onChangeText = {this.placeNameChangedHandler}/>
                     <View style ={styles.buttons}>
-                        <Button title="Locate Me" />
-                    </View>
-                    <DefaultInput style={{ color: "black" }} placeholder="Place Name" />
-                    <View style ={styles.buttons}>
-                        <Button title="Sahre the place" />
+                        <Button title="Sahre the place" onPress = {this.placeAddedHandler} />
                     </View>
                 </View>
             </ScrollView>
