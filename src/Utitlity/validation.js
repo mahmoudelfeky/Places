@@ -1,4 +1,4 @@
-
+import {ToastAndroid} from "react-native";
 const validate = (val , rules,connectedValue)=>{
     
     let isValid = true;
@@ -27,7 +27,6 @@ const emailValidator = val => {
     const res = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(
         val
       );
-      ToastAndroid.show(res+"",.1);
     return  res;
   };
 
