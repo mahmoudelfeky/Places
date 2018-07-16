@@ -15,6 +15,10 @@ class SharePlaceScreen extends DrawerComponent {
         placeName:""
     }
 
+    static navigatorStyle = {
+        navBarButtonColor:"orange"
+    }
+
     placeAddedHandler = () => {
        if(this.state.placeName.trim()!=="")
        {

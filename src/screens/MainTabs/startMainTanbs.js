@@ -40,11 +40,17 @@ const startMainTabs = ()=>
                     ]
                 }
               }],
+              tabsStyle:{
+                  tabBarSelectedButtonColor:"orange"
+              },
               drawer:{
                   left:{
                       screen:"awesome-places.SiderDrawer"
                   }
-              }
+              },
+              appStyle:{
+                tabBarSelectedButtonColor:"orange"
+            }
         });
     })
    

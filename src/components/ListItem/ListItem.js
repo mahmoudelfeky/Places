@@ -20,9 +20,11 @@ const styles = StyleSheet.create({
     width: "95%",
     margin: 5,
     padding: 10,
-    backgroundColor: "#DCDCDC",
+    // backgroundColor: "#DCDCDC",
+    borderColor:"orange",
     flexDirection: "row",
     alignItems: "center",
+    borderWidth:3,
     borderRadius:5
   },
   placeText:{
