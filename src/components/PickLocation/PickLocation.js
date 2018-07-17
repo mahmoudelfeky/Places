@@ -26,7 +26,7 @@ class PickLocation extends Component {
         },
             err => {
                 alert("Fetching Position Failed")
-            }) ;
+            });
     }
     pickLocationHandler = event => {
         const coords = event.nativeEvent.coordinate
@@ -44,6 +44,10 @@ class PickLocation extends Component {
                 },
                 locationChosen: true
             }
+        })
+        this.props.onlocationPick({
+            latitude: coords.latitude,
+            longitude: coords.longitude
         })
     }
     render() {

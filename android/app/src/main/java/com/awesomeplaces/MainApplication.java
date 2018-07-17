@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.reactnativenavigation.NavigationApplication;
+import com.imagepicker.ImagePickerPackage;
 
  public class MainApplication extends NavigationApplication {
 
@@ -60,7 +61,8 @@ import com.reactnativenavigation.NavigationApplication;
          return Arrays.<ReactPackage>asList(
              // eg. new VectorIconsPackage()
              new VectorIconsPackage(),
-             new MapsPackage()
+             new MapsPackage(),
+              new ImagePickerPackage()
          );
      }
 

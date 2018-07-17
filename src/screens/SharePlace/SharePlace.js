@@ -1,57 +1,146 @@
-import React, { Component } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ScrollView ,Image } from 'react-native';
-import { connect } from 'react-redux';
-import DrawerComponent, { } from "../../components/DrawerComponent/DrawerComponent";
-import { addPlace } from '../../store/actions/index';
-import PlaceInput from "../../components/PlaceInput/PlaceInput";
-import MainText from '../../components/UI/MainText/MainText';
-import HeadingText from '../../components/UI/HeadingText/HeadingText';
+import React, { Component } from "react";
+import {
+    View,
+    Text,
+    TextInput,
+    Button,
+    StyleSheet,
+    ScrollView,
+    Image
+} from "react-native";
+import { connect } from "react-redux";
 
-import PickLocation from "../../components/PickLocation/PickLocation";
+import { addPlace } from "../../store/actions/index";
+import PlaceInput from "../../components/PlaceInput/PlaceInput";
+import MainText from "../../components/UI/MainText/MainText";
+import HeadingText from "../../components/UI/HeadingText/HeadingText";
 import PickImage from "../../components/PickImage/PickImage";
-class SharePlaceScreen extends DrawerComponent {
+import PickLocation from "../../components/PickLocation/PickLocation";
+import validate from "../../Utitlity/validation";
+
+class SharePlaceScreen extends Component {
+    static navigatorStyle = {
+        navBarButtonColor: "orange"
+    };
 
     state = {
-        placeName:""
+        controls: {
+            placeName: {
+                value: "",
+                valid: false,
+                touched: false,
+                validationRules: {
+                    notEmpty: true
+                }
+            },
+            location: {
+                value: null,
+                valid: false
+            },
+            image: {
+                value: null,
+                valid: false
+            }
+        }
+    };
+
+    constructor(props) {
+        super(props);
+        this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
     }
 
-    static navigatorStyle = {
-        navBarButtonColor:"orange"
+    onNavigatorEvent = event => {
+        if (event.type === "NavBarButtonPress") {
+            if (event.id === "sideDrawerToggle") {
+                this.props.navigator.toggleDrawer({
+                    side: "left"
+                });
+            }
+        }
+    };
+
+
+    placeNameChangedHandler = val => {
+        this.setState(prevState => {
+            return {
+                controls: {
+                    ...prevState.controls,
+                    placeName: {
+                        ...prevState.controls.placeName,
+                        value: val,
+                        valid: validate(val, prevState.controls.placeName.validationRules),
+                        touched: true
+                    }
+                }
+            };
+        });
+    };
+    imagePickedHandler = image => {
+        this.setState(prevState => {
+            return {
+                controls: {
+                    ...prevState.controls,
+                    image: {
+                        value: image,
+                        valid: true
+                    }
+
+                }
+            }
+        })
     }
 
     placeAddedHandler = () => {
-       if(this.state.placeName.trim()!=="")
-       {
-        this.props.onAddPlace(this.state.placeName);
-       }
-    }
-    
-    placeNameChangedHandler = val => {
-        this.setState({
-          placeName: val
-        });
-      };
 
+        this.props.onAddPlace(
+            this.state.controls.placeName.value,
+            this.state.controls.location.value,
+            this.state.controls.image.value);
+    };
+    locationPickedHandler = location => {
+
+        this.setState(prevState => {
+            return {
+                controls: {
+                    ...prevState.controls,
+                    location: {
+                        value: location,
+                        valid: true
+                    }
+
+                }
+            }
+        })
+    }
     render() {
         return (
-            <ScrollView >
+            <ScrollView>
                 <View style={styles.container}>
-                <MainText>
-                    <HeadingText>Share a place with us </HeadingText>
-                </MainText>
-                   <PickImage/>
-                   
-                   <PickLocation/>
-
-                    <PlaceInput placeName = {this.state.placeName} onChangeText = {this.placeNameChangedHandler}/>
-                    <View style ={styles.buttons}>
-                        <Button title="Sahre the place" onPress = {this.placeAddedHandler} />
+                    <MainText>
+                        <HeadingText>Share a Place with us!</HeadingText>
+                    </MainText>
+                    <PickImage onImagePicked={this.imagePickedHandler} />
+                    <PickLocation onlocationPick={this.locationPickedHandler} />
+                    <PlaceInput
+                        placeData={this.state.controls.placeName}
+                        onChangeText={this.placeNameChangedHandler}
+                    />
+                    <View style={styles.button}>
+                        <Button
+                            title="Share the Place!"
+                            onPress={this.placeAddedHandler}
+                            disabled={
+                                !this.state.controls.placeName.valid ||
+                                !this.state.controls.location.valid ||
+                                !this.state.controls.image.valid }
+                        />
                     </View>
                 </View>
             </ScrollView>
         );
     }
 }
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
@@ -62,20 +151,20 @@ const styles = StyleSheet.create({
         borderColor: "black",
         backgroundColor: "#eee",
         width: "80%",
-        height: 300
-
+        height: 150
     },
-    buttons:{
-        margin:8
+    button: {
+        margin: 8
     },
-    previewImage:{
-        width:"100%",
-        height:"100%"
+    previewImage: {
+        width: "100%",
+        height: "100%"
     }
-})
+});
+
 const mapDispatchToProps = dispatch => {
     return {
-        onAddPlace: (placeName) => dispatch(addPlace(placeName))
+        onAddPlace: (placeName, location,image) => dispatch(addPlace(placeName, location,image))
     };
 };
 
