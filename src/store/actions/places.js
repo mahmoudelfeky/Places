@@ -41,40 +41,40 @@ export const addPlace = (placeName, location, image) => {
     };
 };
 
-// export const getPlaces = () => {
-//     return dispatch => {
-//         fetch("https://awesome-places-1511248766522.firebaseio.com/places.json")
-//         .catch(err => {
-//             alert("Something went wrong, sorry :/");
-//             console.log(err);
-//         })
-//         .then(res => res.json())
-//         .then(parsedRes => {
-//             const places = [];
-//             for (let key in parsedRes) {
-//                 places.push({
-//                     ...parsedRes[key],
-//                     image: {
-//                         uri: parsedRes[key].image
-//                     },
-//                     key: key
-//                 });
-//             }
-//             dispatch(setPlaces(places));
-//         });
-//     };
-// };
+export const getPlaces = () => {
+    return dispatch => {
+        fetch("https://places-210412.firebaseio.com/places.json")
+        .catch(err => {
+            alert("Something went wrong, sorry :/");
+            console.log(err);
+        })
+        .then(res => res.json())
+        .then(parsedRes => {
+            const places = [];
+            for (let key in parsedRes) {
+                places.push({
+                    ...parsedRes[key],
+                    image: {
+                        uri: parsedRes[key].image
+                    },
+                    key: key
+                });
+            }
+            dispatch(setPlaces(places));
+        });
+    };
+};
 
-// export const setPlaces = places => {
-//     return {
-//         type: SET_PLACES,
-//         places: places
-//     };
-// };
+export const setPlaces = places => {
+    return {
+        type: SET_PLACES,
+        places: places
+    };
+};
 
-// export const deletePlace = (key) => {
-//     return {
-//         type: DELETE_PLACE,
-//         placeKey: key
-//     };
-// };
+export const deletePlace = (key) => {
+    return {
+        type: DELETE_PLACE,
+        placeKey: key
+    };
+};

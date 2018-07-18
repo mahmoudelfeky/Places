@@ -4,6 +4,7 @@ import PlaceList, { } from "../../components/PlaceList/PlaceList";
 import { connect } from "react-redux";
 import DrawerComponent, { } from "../../components/DrawerComponent/DrawerComponent";
 
+import { getPlaces } from "../../store/actions/index";
 
 class FindPlaceScreen extends DrawerComponent {
     state = {
@@ -42,6 +43,10 @@ class FindPlaceScreen extends DrawerComponent {
       placesLoadedHandler = () => {
 
     }
+    componentDidMount() {
+        this.props.onLoadPlaces();
+      }
+
     render() {
         let content = (
             <Animated.View
@@ -99,7 +104,15 @@ const styles = StyleSheet.create({
 })
 const mapStateToProps = state => {
     return {
-        places: state.places.places
-    }
-}
-export default connect(mapStateToProps, null)(FindPlaceScreen);
+      places: state.places.places
+    };
+  };
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+      onLoadPlaces: () => dispatch(getPlaces())
+    };
+  };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(FindPlaceScreen);
+  
